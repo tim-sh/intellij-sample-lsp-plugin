@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.16.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:24.1.0'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs('src/main/gen')
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+intellij {
+    pluginName = project.findProperty("pluginName")
+    version = project.findProperty("platformVersion")
+    type = project.findProperty("platformType")
+    updateSinceUntilBuild.set(false)
+    runIde.ideDir = project.file("/opt/webstorm")
+}
+
+tasks {
+    wrapper {
+        gradleVersion = project.findProperty("gradleVersion")
+    }
+
+    patchPluginXml {
+        version = project.findProperty("pluginVersion")
+        sinceBuild = project.findProperty("pluginSinceBuild")
+    }
+
+    runIde {
+        dependsOn 'copyLspServer'
+    }
+
+    buildPlugin {
+        dependsOn 'copyLspServer'
+    }
+}
+
+tasks.register('copyLspServer', Copy) {
+    mustRunAfter 'buildSearchableOptions'
+    from "./lsp-server"
+    into "./build/idea-sandbox/plugins/${project.properties['pluginName']}/lib/lsp-server"
+}

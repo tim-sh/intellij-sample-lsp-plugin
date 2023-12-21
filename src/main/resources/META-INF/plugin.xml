@@ -1,0 +1,16 @@
+<idea-plugin>
+    <!-- id should not be changed! -->
+    <id>intellij-sample-lsp-plugin</id>
+    <name>MyLang Language Support</name>
+    <vendor>me</vendor>
+
+    <description>Just a sample plugin to demo LSP-server integration.</description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.ultimate</depends>
+    <depends>org.jetbrains.plugins.textmate</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <platform.lsp.serverSupportProvider implementation="my.pkg.intellij.lsp.ServerSupportProvider"/>
+    </extensions>
+</idea-plugin>
