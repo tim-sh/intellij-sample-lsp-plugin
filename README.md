@@ -25,3 +25,7 @@ cd ..
 2. Create a new file with the extension `.txt`
 3. Type `hello world` or any other text in the file
 4. The first 5 characters should be marked with a `SAMPLE` warning
+
+## Logging
+
+The LSP server logs information on the communication with the client to a file `server.log` in the `lsp-server` directory.
