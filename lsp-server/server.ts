@@ -79,9 +79,8 @@ function sendDiagnostics(textDocument: TextDocument): void {
     const diagnostic: Diagnostic = {
         severity: DiagnosticSeverity.Warning,
         range: {
-            // Specify the range within the document that the diagnostic applies to
-            start: Position.create(0, 0), // Line and character position (0-based)
-            end: Position.create(0, 5) // End line and character position
+            start: Position.create(0, 0),
+            end: Position.create(0, 5)
         },
         message: `SAMPLE`,
         source: 'lsp-server-stub'
